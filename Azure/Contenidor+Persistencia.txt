@@ -1,0 +1,41 @@
+//Información sacada de:
+//https://docs.microsoft.com/es-es/azure/container-instances/container-instances-volume-azure-files#code-try-0
+
+//Comandos con Storage ya creado
+//Se crea una clave encriptada
+1) STORAGE_KEY=$(az storage account keys list 
+     --resource-group $ACI_PERS_RESOURCE_GROUP 
+     --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME 
+     --query "[0].value" 
+     --output tsv)
+
+//Para ver si ha creado correctamente la clave
+2) echo $STORAGE_KEY 
+
+//Creacion de un contenedor con persitencia (muy similar a linkar un volumen con un contenedor en docker)
+3) az container create \
+     --resource-group $ACI_PERS_RESOURCE_GROUP \
+     --name nodered01 \
+     --image nodered/node-red:latest \     
+     --dns-name-label pfmedars \   
+     --ports 80 1880 \
+     --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+     --azure-file-volume-account-key $STORAGE_KEY \
+     --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
+     --azure-file-volume-mount-path
+
+
+//EJEMPLO
+1) STORAGE_KEY=$(az storage account keys list 
+--resource-group iotClassDoker --account-name iotstorage00 --query "[0].value" --output tsv)
+
+2) az container create \
+    --resource-group iotClassDoker \
+    --name granjasiot25 \
+    --image nodered/node-red:latest \
+    --dns-name-label granjasiot25 \
+    --ports 1883 1880 \
+    --azure-file-volume-account-name iotstorage00 \
+    --azure-file-volume-account-key $STORAGE_KEY \
+    --azure-file-volume-share-name granjasiot \
+    --azure-file-volume-mount-path /data

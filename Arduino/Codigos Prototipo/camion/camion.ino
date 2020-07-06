@@ -14,9 +14,6 @@
 #define TX_PIN 17 // Pinout TX of ESP32
 #define REFRESH_RATE 5000 // Defined in miliseconds
 
-
-
-
 // Replace the next variables with your Wi-Fi SSID/Password
 const char *WIFI_SSID = "Redmi";
 const char *WIFI_PASSWORD = "1638c7263f56";
@@ -39,8 +36,6 @@ TinyGPSPlus gps;
 
 
 void setup() {
-  
-
   Serial.begin(9600); // Starts the serial communication
   Serial.println("\nBooting device...");
 
@@ -71,7 +66,7 @@ void loop() {
   nowTime = millis();
   elapsedTime = nowTime - startTime;
   if (elapsedTime >= 2000) {
-    
+    readDHT();
     publishSmallJson();   // Publishes a small json
     publishGPS();
     startTime = nowTime;
@@ -112,24 +107,25 @@ void publishGPS() {
 
 }
 
-void publishSmallJson() {
-  static const String topicStr = createTopic("small_json");
-  static const char *topic = topicStr.c_str();
+void readDHT(){
   static float temperature;
   temperature = dhtSensor.readTemperature();
   
-   static float humidity; // Variable that will store the last humidity value
-  humidity = dhtSensor.readHumidity();  
+  static float humidity; // Variable that will store the last humidity value
+  humidity = dhtSensor.readHumidity(); 
   
-  static float distance;
+}
+
+void publishSmallJson() {
+  static const String topicStr = createTopic("small_json");
+  static const char *topic = topicStr.c_str();
   
-  distance = getDistance();
+  static float distance = getDistance();
    
   StaticJsonDocument<128> doc; // Create JSON document of 128 bytes
   char buffer[128]; // Create the buffer where we will print the JSON document
                     // to publish through MQTT
   
-
   doc["device"] = "ESP32"; // Add names and values to the JSON document
   doc["sensor"] = "DHT22";
   doc["sensor1"] = "Ultrasonido";

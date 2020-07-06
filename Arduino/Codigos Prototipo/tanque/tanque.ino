@@ -2,7 +2,8 @@
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient
 #include <WiFi.h>
 #include <Wire.h>
-#include "DHT.h" 
+#include "DHT.h"
+ 
 #define ECHO_PIN 12 // Analog input that receives the echo signal
 #define TRIG_PIN 13 // Digital output that sends the trigger signal
 #define DHT_PIN 21     
@@ -10,11 +11,11 @@
 
 
 // Replace the next variables with your Wi-Fi SSID/Password
-const char *WIFI_SSID = "Redmi";
-const char *WIFI_PASSWORD = "1638c7263f56";
+const char *WIFI_SSID = "ESPRESSIF";
+const char *WIFI_PASSWORD = "Espressif123";
 char macAddress[18];
 
-const char *MQTT_BROKER_IP = "10.20.60.5";
+const char *MQTT_BROKER_IP = "192.168.5.1";
 const int MQTT_PORT = 1883;
 const char *MQTT_USER = "";
 const char *MQTT_PASSWORD = "";
@@ -25,15 +26,16 @@ PubSubClient mqttClient(wifiClient);
 
 DHT dhtSensor(21, DHT11);
 
+static float temperature;
+static float humidity; 
+static float distance;
+
 
 void setup() {
-  
-
   Serial.begin(9600); // Starts the serial communication
   Serial.println("\nBooting device...");
 
-  mqttClient.setServer(MQTT_BROKER_IP,
-                       MQTT_PORT); // Connect the configured mqtt broker
+  mqttClient.setServer(MQTT_BROKER_IP, MQTT_PORT); // Connect the configured mqtt broker
   pinMode(ECHO_PIN, INPUT);  // Sets the ECHO_PIN as an Input
   pinMode(TRIG_PIN, OUTPUT); // Sets the TRIG_PIN as an Output
 
@@ -53,39 +55,33 @@ void loop() {
   nowTime = millis();
   elapsedTime = nowTime - startTime;
   if (elapsedTime >= 2000) {
-    
+    readValues();
     publishSmallJson();   // Publishes a small json
     startTime = nowTime;
   }
  
 }
 
-
+void readValues(){
+  temperature = dhtSensor.readTemperature();
+  humidity = dhtSensor.readHumidity();
+  distance = getDistance();  
+  
+}
 
 
 void publishSmallJson() {
   static const String topicStr = createTopic("small_json");
   static const char *topic = topicStr.c_str();
-  static float temperature;
-  temperature = dhtSensor.readTemperature();
-  
-   static float humidity; // Variable that will store the last humidity value
-  humidity = dhtSensor.readHumidity();  
-  
-  static float distance;
-  
-  distance = getDistance();
    
   StaticJsonDocument<128> doc; // Create JSON document of 128 bytes
   char buffer[128]; // Create the buffer where we will print the JSON document
                     // to publish through MQTT
   
-
   doc["device"] = "ESP32"; // Add names and values to the JSON document
   doc["sensor"] = "DHT22";
   doc["sensor1"] = "Ultrasonido";
-  JsonObject values1 =
-      doc.createNestedObject("values1"); // We can add another Object
+  JsonObject values1 = doc.createNestedObject("values1"); // We can add another Object
   values1["t"] = temperature;
   values1["h"] = humidity;  
   values1["d"] = distance;

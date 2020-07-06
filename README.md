@@ -3,30 +3,14 @@ Este repositorio se ha creado explícitamente para el _postgrado de IoT_ de la _
 
 | | | | | |
 |-|-|-|-|-|
-|[**Arduino**](#Arduino) |[**Azure**](#Azure) |[**Cliente**](#Cliente) |[**Nodered**](#Nodered) |[**Raspberry**](#Raspberry)|
+|[**Documentación**](#Documentación) |[**Prototipo**](#Prototipo) |
 | | | | | |
 
-## [Arduino](/Arduino)
-Sitio donde se colgaran todos los cogidos que se hagan para los dispositivos que hay en el proyecto.
-### [Prototipo](/Arduino/CodigosProtitipo)
-Primeros códigos.
+## [Documentación](/Documentación)
 
 
-## [Azure](/Azure)
-Documentación importante sobre Azure. Actualmente información sobre la creación de contenedores persistentes.
+## [Prototipo](/Prototipo)
 
-
-## [Cliente](/Cliente)
-Documentación entregada hasta la fecha de _ESPRESSIF_ a _RASP_.
-
-
-## [Nodered](/Nodered)
-Dashboards i base de datos entregados hasta la fecha de _ESPRESSIF_ a _RASP_.
-
-## [Raspberry](/Raspberry)
-Documentación i códigos para la configuración de las raspberrys como gateways. (**Actualmente vacío**)
-
-[[Go to top]](#ESPRESSIF)
 
 
 ## Autores

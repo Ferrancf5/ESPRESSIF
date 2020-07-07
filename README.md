@@ -15,6 +15,10 @@ Así que hemos estructurado la documentación por Sprints.
 
 - ### [Sprint 04](/Documentaci%C3%B3n/Sprint%2004)
 
+Además, se ha añadido una carpeta con fotos de como quedará nuestro dashboard para este proyecto.
+
+- ### [Imagenes]((/Documentaci%C3%B3n/Imagenes)
+
 
 ## [Prototipo](/Prototipo)
 Hay toda la programación utilizada y explicada para poder enseñar al cliente un prototipo del futuro funcionamiento según nuestra propuesta. Es solo un prototipo ya que se han utilizado dispositivos y sensórica simple, para el proyecto final se utilizará el material descrito en la documentación. 
@@ -26,6 +30,9 @@ Hay toda la programación utilizada y explicada para poder enseñar al cliente u
 - ### [Nodered](/Prototipo/Nodered)
 
 - ### [Raspberry](/Prototipo/Raspberry)
+
+
+[[Go to top]](#ESPRESSIF)
 
 ## Autores
 - [@Ferrancf5](https://github.com/Ferrancf5)

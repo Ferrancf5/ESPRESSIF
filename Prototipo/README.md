@@ -11,7 +11,7 @@ Sitio donde se colgaran todos los codigos que se hagan para los dispositivos que
 
 Además, el código de LoraWAN solo se ha utilizado como prueba de comunicación con un gateway hecho por nosotros. Se ha puesto a modo de prueba ya que se utilizarán dispositivos y gateways industriales los sensores de la vaca.
 
-### [Camion](/Arduino/camion)
+### [Camión](/Arduino/camion)
 **Código**
 ```cpp
 #include <ArduinoJson.h>  // https://arduinojson.org/

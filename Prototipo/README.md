@@ -1,9 +1,9 @@
 # PROTOTIPO
 
-| | | | | |
-|-|-|-|-|-|
+| | | | |
+|-|-|-|-|
 |[**Arduino**](#Arduino) |[**Azure**](#Azure) |[**Nodered**](#Nodered) |[**Raspberry**](#Raspberry)|
-| | | | | |
+| | | | |
 
 
 ## [Arduino](/Arduino)

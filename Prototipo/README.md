@@ -12,7 +12,7 @@ Sitio donde se colgaran todos los codigos que se hagan para los dispositivos que
 Además, el código de LoraWAN solo se ha utilizado como prueba de comunicación con un gateway hecho por nosotros. Se ha puesto a modo de prueba ya que se utilizarán dispositivos y gateways industriales los sensores de la vaca.
 
 ### [Camion](/Arduino/camion)
-· Código
+**Código**
 ```cpp
 #include <ArduinoJson.h>  // https://arduinojson.org/
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient
@@ -216,7 +216,7 @@ void checkConnections() {
 [[Go to top]](#Prototipo)
 
 ### [Tanque](/Arduino/tanque)
-· Código
+**Código**
 ```cpp
 #include <ArduinoJson.h>  // https://arduinojson.org/
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient
@@ -375,7 +375,7 @@ void checkConnections() {
 [[Go to top]](#Prototipo)
 
 ### [Puerta](/Arduino/puerta)
-· Código
+**Código**
 ```cpp
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient
 #include <WiFi.h>
@@ -517,9 +517,9 @@ void checkConnections() {
 [[Go to top]](#Prototipo)
 
 ### [LoraWanABP](/Arduino/lorawanABP)
-· Libreria - [arduino-lmic](https://github.com/matthijskooijman/arduino-lmic)
+**Libreria** -> [arduino-lmic](https://github.com/matthijskooijman/arduino-lmic)
 
-· Código
+**Código**
 ```cpp
 #include <lmic.h> //Libreria arduino-lmic-master.zip de 
 #include <hal/hal.h>

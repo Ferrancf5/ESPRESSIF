@@ -13,7 +13,7 @@ Así que hemos estructurado la documentación por Sprints.
 
 - ### [Sprint 03](/Documentaci%C3%B3n/Sprint%2003)
 
-- ### [Sprint 04] (/Documentaci%C3%B3n/Sprint%2004)
+- ### [Sprint 04](/Documentaci%C3%B3n/Sprint%2004)
 
 
 ## [Prototipo](/Prototipo)

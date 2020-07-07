@@ -6,7 +6,7 @@
  
 #define ECHO_PIN 12 // Analog input that receives the echo signal
 #define TRIG_PIN 13 // Digital output that sends the trigger signal
-#define DHT_PIN 21     
+#define DHT_PIN 22     
 #define DHT_TYPE DHT11 
 
 // Replace the next variables with your Wi-Fi SSID/Password
@@ -15,7 +15,7 @@ const char *WIFI_PASSWORD = "Espressif123";
 char macAddress[18];
 
 const char *MQTT_BROKER_IP = "192.168.5.1";
-const int MQTT_PORT = 1883;
+const int MQTT_PORT = 1884;
 const char *MQTT_USER = "";
 const char *MQTT_PASSWORD = "";
 const bool RETAINED = true;

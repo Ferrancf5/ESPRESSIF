@@ -15,9 +15,9 @@ Así que hemos estructurado la documentación por Sprints.
 
 - ### [Sprint 04](/Documentaci%C3%B3n/Sprint%2004)
 
-Además, se ha añadido una carpeta con fotos de como quedará nuestro dashboard para este proyecto.
 
-- ### [Imagenes]((/Documentaci%C3%B3n/Imagenes)
+Además, se ha añadido una carpeta con fotos de como quedará nuestro dashboard para este proyecto.
+- ### [Imagenes](/Documentaci%C3%B3n/Imagenes)
 
 
 ## [Prototipo](/Prototipo)

@@ -98,8 +98,8 @@ void publishJson() {
   static const String topicStr = createTopic("small_json");
   static const char *topic = topicStr.c_str();
    
-  StaticJsonDocument<150> doc; // Create JSON document of 128 bytes
-  char buffer[150]; // Create the buffer where we will print the JSON document
+  StaticJsonDocument<185> doc; // Create JSON document of 128 bytes
+  char buffer[185]; // Create the buffer where we will print the JSON document
                     // to publish through MQTT
   
  doc["device"] = "ESP32"; // Add names and values to the JSON document
@@ -112,8 +112,9 @@ void publishJson() {
   sensor02["d"] = distance;
   JsonObject sensor03 = 
       doc["sensores"].createNestedObject("GPS"); // We can add another Object 
+
   sensor03["lat"] = LAT;
-  sensor03["lon"] = LON;
+  sensor03["lon"] = LONG;
 
 
   // Serialize the JSON document to a buffer in order to publish it

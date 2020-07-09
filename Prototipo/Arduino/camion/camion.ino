@@ -20,7 +20,7 @@ const char *WIFI_PASSWORD = "Espressif123";
 char macAddress[18];
 
 const char *MQTT_BROKER_IP = "192.168.5.1";
-const int MQTT_PORT = 1883;
+const int MQTT_PORT = 1884;
 const char *MQTT_USER = "";
 const char *MQTT_PASSWORD = "";
 const bool RETAINED = true;
@@ -68,8 +68,7 @@ void loop() {
   elapsedTime = nowTime - startTime;
   if (elapsedTime >= 2000) {
     readValues();
-    publishSmallJson();   // Publishes a small json
-    publishGPS();
+    publishJson();   // Publishes a small json
     startTime = nowTime;
   }
  if (SerialGPS.available()) {
@@ -88,24 +87,6 @@ void printGpsReadings(TimerHandle_t xTimer){
 
 }
 
-void publishGPS() {
-
-  static const String topicGPS = createTopic("GPS");
-  static const char *topic = topicGPS.c_str();
-
-  StaticJsonDocument<128> doc; // Create JSON document of 128 bytes
-
-  char buffer[128]; // Create the buffer where we will print the JSON document
-                    // to publish through MQTT
-  doc["lat"] = LAT;
-  doc["long"] = LONG;
-
-  // Serialize the JSON document to a buffer in order to publish it
-  serializeJson(doc, buffer);
-  mqttClient.publish(topic, buffer, RETAINED);
-  Serial.println(" <= " + String(topic) + ": " + String(buffer));
-}
-
 void readValues(){
   temperature = dhtSensor.readTemperature();
   humidity = dhtSensor.readHumidity();
@@ -113,21 +94,27 @@ void readValues(){
   
 }
 
-void publishSmallJson() {
+void publishJson() {
   static const String topicStr = createTopic("small_json");
   static const char *topic = topicStr.c_str();
    
-  StaticJsonDocument<128> doc; // Create JSON document of 128 bytes
-  char buffer[128]; // Create the buffer where we will print the JSON document
+  StaticJsonDocument<150> doc; // Create JSON document of 128 bytes
+  char buffer[150]; // Create the buffer where we will print the JSON document
                     // to publish through MQTT
   
-  doc["device"] = "ESP32"; // Add names and values to the JSON document
-  doc["sensor"] = "DHT22";
-  doc["sensor1"] = "Ultrasonido";
-  JsonObject values1 = doc.createNestedObject("values1"); // We can add another Object
-  values1["t"] = temperature;
-  values1["h"] = humidity;  
-  values1["d"] = distance;
+ doc["device"] = "ESP32"; // Add names and values to the JSON document
+  JsonObject sensor01 = 
+      doc["sensores"].createNestedObject("DHT11"); // We can add another Object
+  sensor01["t"] = temperature;
+  sensor01["h"] = humidity;
+  JsonObject sensor02 = 
+      doc["sensores"].createNestedObject("Ultrasonido"); // We can add another Object 
+  sensor02["d"] = distance;
+  JsonObject sensor03 = 
+      doc["sensores"].createNestedObject("GPS"); // We can add another Object 
+  sensor03["lat"] = LAT;
+  sensor03["lon"] = LON;
+
 
   // Serialize the JSON document to a buffer in order to publish it
   serializeJson(doc, buffer);

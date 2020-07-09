@@ -6,7 +6,7 @@
  
 #define ECHO_PIN 12 // Analog input that receives the echo signal
 #define TRIG_PIN 13 // Digital output that sends the trigger signal
-#define DHT_PIN 22     
+#define DHT_PIN 21     
 #define DHT_TYPE DHT11 
 
 // Replace the next variables with your Wi-Fi SSID/Password
@@ -54,7 +54,7 @@ void loop() {
   elapsedTime = nowTime - startTime;
   if (elapsedTime >= 2000) {
     readValues();
-    publishSmallJson();   // Publishes a small json
+    publishJson();   // Publishes a small json
     startTime = nowTime;
   }
  
@@ -68,7 +68,7 @@ void readValues(){
 }
 
 
-void publishSmallJson() {
+void publishJson() {
   static const String topicStr = createTopic("small_json");
   static const char *topic = topicStr.c_str();
    
@@ -77,12 +77,13 @@ void publishSmallJson() {
                     // to publish through MQTT
   
   doc["device"] = "ESP32"; // Add names and values to the JSON document
-  doc["sensor"] = "DHT22";
-  doc["sensor1"] = "Ultrasonido";
-  JsonObject values1 = doc.createNestedObject("values1"); // We can add another Object
-  values1["t"] = temperature;
-  values1["h"] = humidity;  
-  values1["d"] = distance;
+  JsonObject sensor01 = 
+      doc["sensores"].createNestedObject("DHT11"); // We can add another Object
+  sensor01["t"] = temperature;
+  sensor01["h"] = humidity;
+  JsonObject sensor02 = 
+      doc["sensores"].createNestedObject("Ultrasonido"); // We can add another Object 
+  sensor02["d"] = distance;
 
   // Serialize the JSON document to a buffer in order to publish it
   serializeJson(doc, buffer);

@@ -5,13 +5,13 @@
 #define LED_PIN 25
 
 // Replace the next variables with your Wi-Fi SSID/Password
-const char *WIFI_SSID = "AulaAutomatica";
-const char *WIFI_PASSWORD = "ticsFcim";
+const char *WIFI_SSID = "ESPRESSIF";
+const char *WIFI_PASSWORD = "Espressif123";
 char macAddress[18];
 
 // Add MQTT Broker settings
-const char *MQTT_BROKER_IP = "10.20.60.5";
-const int MQTT_PORT = 1883;
+const char *MQTT_BROKER_IP = "192.168.5.1";
+const int MQTT_PORT = 1884;
 const char *MQTT_USER = "";
 const char *MQTT_PASSWORD = "";
 const bool RETAINED = true;

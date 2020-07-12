@@ -2,7 +2,7 @@
 #include <WiFi.h>
 #include <Wire.h>
 
-#define LED_PIN 25
+#define PUERTA_PIN 25
 
 // Replace the next variables with your Wi-Fi SSID/Password
 const char *WIFI_SSID = "ESPRESSIF";
@@ -24,7 +24,7 @@ void setup() {
   Serial.begin(9600); // Starts the serial communication
   Serial.println("\nBooting device...");
 
-  pinMode(LED_PIN, OUTPUT); // Pinout as output
+  pinMode(PUERTA_PIN, OUTPUT); // Pinout as output
   
   mqttClient.setServer(MQTT_BROKER_IP,MQTT_PORT); // Connect the configured mqtt broker
   mqttClient.setCallback(
@@ -42,7 +42,7 @@ void loop() {
 /* Additional functions */
 void setSubscriptions() {
   //subscribe("GPS");
-  subscribe("LED");
+  subscribe("puerta");
 }
 
 void subscribe(char *newTopic) {
@@ -56,18 +56,18 @@ void subscribe(char *newTopic) {
 void callback(char *topic, byte *payload, unsigned int length) {
   // Register all subscription topics
   //static const String gpsTopicStr = createTopic("GPS");
-  static const String ledTopic = createTopic("LED");
+  static const String puertaTopic = createTopic("puerta");
 
   String msg = unwrapMessage(payload, length);
   Serial.println(" => " + String(topic) + ": " + msg);
 
   // What to do in each topic case?
-  if (String(topic) == ledTopic) {
+  if (String(topic) == puertaTopic) {
     if (msg == "1"){
-      digitalWrite(LED_PIN, HIGH); // Set pin to HIGH
+      digitalWrite(PUERTA_PIN, HIGH); // Set pin to HIGH
     }
     else{
-      digitalWrite(LED_PIN, LOW); // Set pin to HIGH
+      digitalWrite(PUERTA_PIN, LOW); // Set pin to HIGH
     }
     
   } else {

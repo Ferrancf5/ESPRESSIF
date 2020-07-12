@@ -31,8 +31,8 @@ PubSubClient mqttClient(wifiClient);
 TinyGPSPlus gps; 
 HardwareSerial SerialGPS(1);
 
-static float LAT;
-static float LONG;
+static float latitud;
+static float longitud;
 static float temperature;
 static float humidity; 
 static float distance;
@@ -78,11 +78,11 @@ void loop() {
 
 void printGpsReadings(TimerHandle_t xTimer){
   
-  LAT = gps.location.lat();
-  LONG = gps.location.lng();
+  latitud = gps.location.lat();
+  longitud = gps.location.lng();
 
-  Serial.print("LAT=");   Serial.println(String(LAT).c_str()); // Latitude in degrees (double)
-  Serial.print("LONG=");  Serial.println(String(LONG).c_str()); // Longitude in degrees (double)
+  Serial.print("LAT=");   Serial.println(String(latitud).c_str()); // Latitude in degrees (double)
+  Serial.print("LONG=");  Serial.println(String(longitud).c_str()); // Longitude in degrees (double)
   Serial.print("SATS=");  Serial.println(gps.satellites.value()); // Number of satellites in use (u32)
 
 }
@@ -95,7 +95,7 @@ void readValues(){
 }
 
 void publishJson() {
-  static const String topicStr = createTopic("small_json");
+  static const String topicStr = createTopic("camion");
   static const char *topic = topicStr.c_str();
    
   StaticJsonDocument<185> doc; // Create JSON document of 128 bytes
@@ -113,8 +113,8 @@ void publishJson() {
   JsonObject sensor03 = 
       doc["sensores"].createNestedObject("GPS"); // We can add another Object 
 
-  sensor03["lat"] = LAT;
-  sensor03["lon"] = LONG;
+  sensor03["lat"] = latitud;
+  sensor03["lon"] = longitud;
 
 
   // Serialize the JSON document to a buffer in order to publish it

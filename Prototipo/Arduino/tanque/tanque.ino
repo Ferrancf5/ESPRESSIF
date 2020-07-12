@@ -69,7 +69,7 @@ void readValues(){
 
 
 void publishJson() {
-  static const String topicStr = createTopic("small_json");
+  static const String topicStr = createTopic("tanque");
   static const char *topic = topicStr.c_str();
    
   StaticJsonDocument<128> doc; // Create JSON document of 128 bytes

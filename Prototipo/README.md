@@ -31,21 +31,41 @@ A continuación, la visualización del Bot:
 
 ![Bot image](Imágenes/Telegram_bot.png)
 
-## [Arduino](/Arduino)
+
+## [Arduino](/Prototipo/Arduino)
 Sitio donde se colgaran todos los codigos que se hagan para los dispositivos que hay en el proyecto. Actualmente no son los códigos finales ya que aún falta reducir el mensaje json para que sea lo más eficiente posible.
+
+- ### [Camion](/Prototipo/Arduino/camion)
+
+- ### [Puerta](/Prototipo/Arduino/puerta)
+
+- ### [Tanque](/Prototipo/Arduino/tanque)
 
 Además, el código de LoraWAN solo se ha utilizado como prueba de comunicación con un gateway hecho por nosotros. Se ha puesto a modo de prueba ya que se utilizarán dispositivos y gateways industriales los sensores de la vaca.
 
+- ### [Vaca](/Prototipo/Arduino/vaca)
 
-## [Azure](/Azure)
+[[Go to top]](#Prototipo)
+
+
+## [Azure](/Prototipo/Azure)
 Documentación importante sobre Azure. Actualmente información sobre la creación de contenedores persistentes y/o máquinas virtuales.
 
 
-## [Nodered](/Nodered)
+## [Nodered](/Prototipo/Nodered)
 Dashboards i base de datos entregados hasta la fecha de _ESPRESSIF_ a _RASP_.
 
+- ### [Sprint 01](/Prototipo/Nodered/Sprint%2001%20-%2003042020)
 
-## [Raspberry](/Raspberry)
-Documentación i códigos para la configuración de las raspberrys como gateways i access point. (**Actualmente vacío**)
+- ### [Sprint 02](/Prototipo/Nodered/Sprint%2002%20-%2012042020)
+
+- ### [Sprint 03](/Prototipo/Nodered/Sprint%2003%20-%2002062020)
+
+- ### [Sprint 04](/Prototipo/Nodered/Sprint%2004%20-%2009062020)
+
+- ### [Sprint 05](/Prototipo/Nodered/Sprint%2005%20-%2014072020)
+
+## [Raspberry](/Prototipo/Raspberry)
+Documentación i códigos para la configuración de las raspberrys como gateways i access point.
 
 [[Go to top]](#Prototipo)

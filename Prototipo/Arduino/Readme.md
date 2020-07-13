@@ -500,12 +500,20 @@ void checkConnections() {
 ```
 [[Go to top]](#Prototipo)
 
-## [LoraWanABP](/Arduino/lorawanABP)
+
+## [Vaca](/Arduino/vaca)
+Como ya se ha dicho, la parte de LoraWAN solo se ha probado para ver el funcionamiento de este protocolo y como se puede comunicar facilamnete gracias a la interficie web de **The Things Network**.
+Se ha separado por diferentes librerias probadas:
+
+### [LMIC](/Arduino/vaca/library-lmic)
 **Libreria** -> [arduino-lmic](https://github.com/matthijskooijman/arduino-lmic)
 
+Dentro se esta carpeta se encuentra otra ya que se ha separado los códigos por si la comunicación era ABP o OTAA.
+
+ - **VacaABP**(/Arduino/vaca/library-lmic/vacaABP)
 **Código**
 ```cpp
-#include <lmic.h> //Libreria arduino-lmic-master.zip de 
+#include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
 
@@ -700,5 +708,128 @@ void setup() {
 void loop() {
     os_runloop_once();
 }
+```
+[[Go to top]](#Prototipo)
+
+### [TTN_ESP32](/Arduino/vaca/library-ttn_esp32)
+**Libreria** -> [arduino-ttn_esp32](https://github.com/rgot-org/TheThingsNetwork_esp32)
+
+- **VacaABP**(/Arduino/vaca/library-ttn_esp32/vacaABP)
+**Código**
+```cpp
+#include <TTN_esp32.h>
+
+#include "TTN_CayenneLPP.h"
+/***************************************************************************
+ *  Go to your TTN console register a device then the copy fields
+ *  and replace the CHANGE_ME strings below
+ ****************************************************************************/
+const char *devAddr = "26011853";
+const char *nwkSKey = "14BF29C0EEF2A895937D7463C4668384";
+const char *appSKey = "54F6B2D6CDF392948FDCB9C979ADAB49";
+
+TTN_esp32 ttn ;
+TTN_CayenneLPP lpp;
+
+void message(const uint8_t* payload, size_t size, int rssi)
+{
+    Serial.println("-- MESSAGE");
+    Serial.print("Received " + String(size) + " bytes RSSI= " + String(rssi) + "dB");
+
+    for (int i = 0; i < size; i++)
+    {
+        Serial.print(" " + String(payload[i]));
+        // Serial.write(payload[i]);
+    }
+
+    Serial.println();
+}
+
+void setup()
+{
+    Serial.begin(115200);
+    Serial.println("Starting");
+    ttn.begin();
+    ttn.onMessage(message); // declare callback function when is downlink from server
+    ttn.personalize(devAddr, nwkSKey, appSKey);
+    ttn.showStatus();
+}
+
+void loop()
+{
+    static float nb = 18.2;
+    nb += 0.1;
+    lpp.reset();
+    lpp.addTemperature(1, nb);
+    if (ttn.sendBytes(lpp.getBuffer(), lpp.getSize()))
+    {
+        Serial.printf("Temp: %f TTN_CayenneLPP: %d %x %02X%02X\n", nb, lpp.getBuffer()[0], lpp.getBuffer()[1],
+            lpp.getBuffer()[2], lpp.getBuffer()[3]);
+    }
+    delay(10000);
+}
+```
+
+- **VacaOTAA**(/Arduino/vaca/library-ttn_esp32/vacaOTAA)
+**Código**
+```cpp
+#include <TTN_esp32.h>
+#include "TTN_CayenneLPP.h"
+/***************************************************************************
+ *  Go to your TTN console register a device then the copy fields
+ *  and replace the CHANGE_ME strings below
+ ****************************************************************************/
+const char *devEui = "001C1574B15C8CB6";
+const char *appEui = "70B3D57ED0030975";
+const char *appKey = "39AFADC115E85681695ACAE44495DAE2";
+
+TTN_esp32 ttn ;
+TTN_CayenneLPP lpp;
+
+void message(const uint8_t* payload, size_t size, int rssi)
+{
+    Serial.println("-- MESSAGE");
+    Serial.print("Received " + String(size) + " bytes RSSI=" + String(rssi) + "db");
+    for (int i = 0; i < size; i++)
+    {
+        Serial.print(" " + String(payload[i]));
+        // Serial.write(payload[i]);
+    }
+
+    Serial.println();
+}
+
+void setup()
+{
+    Serial.begin(115200);
+    Serial.println("Starting");
+    ttn.begin();
+    ttn.onMessage(message); // Declare callback function for handling downlink
+                            // messages from server
+      ttn.join(devEui, appEui, appKey);
+    Serial.print("Joining TTN ");
+    while (!ttn.isJoined())
+    {
+        Serial.print(".");
+        delay(500);
+    }
+    Serial.println("\njoined !");
+    ttn.showStatus();
+}
+
+void loop()
+{
+    static float nb = 18.2;
+    nb += 0.1;
+    lpp.reset();
+    lpp.addTemperature(1, nb);
+    if (ttn.sendBytes(lpp.getBuffer(), lpp.getSize()))
+    {
+        Serial.printf("Temp: %f TTN_CayenneLPP: %d %x %02X%02X\n", nb, lpp.getBuffer()[0], lpp.getBuffer()[1],
+            lpp.getBuffer()[2], lpp.getBuffer()[3]);
+    }
+    delay(10000);
+}
+
 ```
 [[Go to top]](#Prototipo)

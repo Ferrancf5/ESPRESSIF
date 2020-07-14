@@ -66,6 +66,6 @@ Dashboards i base de datos entregados hasta la fecha de _ESPRESSIF_ a _RASP_.
 - ### [Sprint 05](/Prototipo/Nodered/Sprint%2005%20-%2014072020)
 
 ## [Raspberry](/Prototipo/Raspberry)
-Documentación i códigos para la configuración de las raspberrys como gateways i access point.
+Documentación i códigos para la configuración de la raspberry como gateway i access point.
 
 [[Go to top]](#Prototipo)

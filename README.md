@@ -17,7 +17,7 @@ Así que hemos estructurado la documentación por Sprints.
 - ### [Sprint 05](/Documentaci%C3%B3n/Sprint%2005%20-%2014072020)
 
 
-Además, se ha añadido una carpeta con fotos de como quedará el dashboard para este proyecto.
+Además, se ha añadido una carpeta con fotos de como quedará el dashboard para este proyecto y el esquema de comunicaciones.
 - ### [Imagenes](/Documentaci%C3%B3n/Imágenes)
 
 

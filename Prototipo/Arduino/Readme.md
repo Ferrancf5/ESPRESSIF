@@ -1,4 +1,4 @@
-# PROTOTIPO
+# ARDUINO
 
 | | | | |
 |-|-|-|-|
@@ -195,7 +195,7 @@ void checkConnections() {
   }
 }
 ```
-[[Go to top]](#Prototipo)
+[[Go to top]](#Arduino)
 
 ## [Tanque](/Arduino/tanque)
 **Código**
@@ -356,7 +356,7 @@ void checkConnections() {
 }
 
 ```
-[[Go to top]](#Prototipo)
+[[Go to top]](#Arduino)
 
 ## [Puerta](/Arduino/puerta)
 **Código**
@@ -498,7 +498,7 @@ void checkConnections() {
   }
 }
 ```
-[[Go to top]](#Prototipo)
+[[Go to top]](#Arduino)
 
 
 ## [Vaca](/Arduino/vaca)
@@ -511,6 +511,7 @@ Se ha separado por diferentes librerias probadas:
 Dentro se esta carpeta se encuentra otra ya que se ha separado los códigos por si la comunicación era ABP o OTAA.
 
  - **VacaABP**(/Arduino/vaca/library-lmic/vacaABP)
+ 
 **Código**
 ```cpp
 #include <lmic.h>
@@ -709,7 +710,7 @@ void loop() {
     os_runloop_once();
 }
 ```
-[[Go to top]](#Prototipo)
+[[Go to top]](#Arduino)
 
 ### [TTN_ESP32](/Arduino/vaca/library-ttn_esp32)
 **Libreria** -> [arduino-ttn_esp32](https://github.com/rgot-org/TheThingsNetwork_esp32)
@@ -770,7 +771,8 @@ void loop()
 }
 ```
 
-- **VacaOTAA**(/Arduino/vaca/library-ttn_esp32/vacaOTAA)
+- **VacaOTAA** (/Arduino/vaca/library-ttn_esp32/vacaOTAA)
+
 **Código**
 ```cpp
 #include <TTN_esp32.h>
@@ -832,4 +834,4 @@ void loop()
 }
 
 ```
-[[Go to top]](#Prototipo)
+[[Go to top]](#Arduino)
